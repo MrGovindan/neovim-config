@@ -33,6 +33,9 @@ require("lazy").setup({
 
   -- Telescope
   { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep' } },
+
+  -- nvim-lspconfig
+  'neovim/nvim-lspconfig',
 })
 
 -- nvim-tree setup
@@ -65,6 +68,9 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
+-- Misc
+vim.opt.number = true
+
 -- Key Maps
 -- ========
 -- Tabs
@@ -78,3 +84,14 @@ vim.keymap.set('n', '<C-s>', ':w<CR>')
 -- ---------
 local telescope = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', telescope.find_files)
+
+-- LSP
+-- ===
+-- General
+vim.keymap.set('n', ']a', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+vim.keymap.set('n', '[a', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+vim.keymap.set('n', '<C-k><C-i>', '<cmd>lua vim.lsp.buf.hover()<CR>')
+vim.keymap.set('n', '<C-k><C-u>', '<cmd>lua vim.lsp.buf.references()<CR>')
+
+-- Typescript
+require'lspconfig'.tsserver.setup{}
