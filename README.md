@@ -13,17 +13,14 @@
 We need tmux to look at the tmux config in this directory.
 We can achieve this by creating a symlink in the home directory to a file ```.tmux.conf```
 
-## Required repos
-- tmux-onedark-theme - https://github.com/odedlaz/tmux-onedark-theme
-
 # Completed
 - Package Manager
 - Theme
 - Status line
 - TMUX config
-
-# Todo
 - git integration
 - Tmux navigation config
+
+# Todo
 - Tab navigation key maps
 - Save key map
