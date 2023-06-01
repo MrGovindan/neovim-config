@@ -27,6 +27,9 @@ require("lazy").setup({
 
   -- Status Line
   "nvim-lualine/lualine.nvim",
+
+  -- Fugitive
+  'tpope/vim-fugitive',
 })
 
 -- nvim-tree setup
