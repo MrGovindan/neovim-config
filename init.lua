@@ -18,8 +18,12 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 require("lazy").setup({
+	-- File explorer
 	"nvim-tree/nvim-tree.lua",
 	"nvim-tree/nvim-web-devicons",
+
+	-- Theme
+	"navarasu/onedark.nvim",
 })
 
 -- nvim-tree setup
@@ -37,3 +41,9 @@ require("nvim-tree").setup({
 })
 
 vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>')
+
+-- onedark
+require('onedark').setup {
+	style = 'darker'
+}
+require('onedark').load()
