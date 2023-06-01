@@ -61,3 +61,14 @@ require('lualine').setup()
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
+
+-- Key Maps
+-- ========
+-- Tabs
+-- ----
+vim.keymap.set('n', '<C-h>', ':tabprevious<CR>')
+vim.keymap.set('n', '<C-l>', ':tabnext<CR>')
+-- Save
+-- ----
+vim.keymap.set('n', '<C-s>', ':w<CR>')
+

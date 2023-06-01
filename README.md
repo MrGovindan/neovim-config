@@ -20,7 +20,7 @@ We can achieve this by creating a symlink in the home directory to a file ```.tm
 - TMUX config
 - git integration
 - Tmux navigation config
-
-# Todo
 - Tab navigation key maps
 - Save key map
+
+# Todo
