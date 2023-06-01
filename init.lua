@@ -24,6 +24,9 @@ require("lazy").setup({
 
 	-- Theme
 	"navarasu/onedark.nvim",
+
+  -- Status Line
+  "nvim-lualine/lualine.nvim",
 })
 
 -- nvim-tree setup
@@ -47,6 +50,9 @@ require('onedark').setup {
 	style = 'darker'
 }
 require('onedark').load()
+
+-- lualine
+require('lualine').setup()
 
 -- Indentation and Tabs
 vim.opt.tabstop = 2
