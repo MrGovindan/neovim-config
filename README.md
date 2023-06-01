@@ -22,5 +22,6 @@ We can achieve this by creating a symlink in the home directory to a file ```.tm
 - Tmux navigation config
 - Tab navigation key maps
 - Save key map
+- Find files (Telescope)
 
 # Todo

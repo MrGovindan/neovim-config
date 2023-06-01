@@ -30,6 +30,9 @@ require("lazy").setup({
 
   -- Fugitive
   'tpope/vim-fugitive',
+
+  -- Telescope
+  { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep' } },
 })
 
 -- nvim-tree setup
@@ -71,4 +74,7 @@ vim.keymap.set('n', '<C-l>', ':tabnext<CR>')
 -- Save
 -- ----
 vim.keymap.set('n', '<C-s>', ':w<CR>')
-
+-- Telescope
+-- ---------
+local telescope = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', telescope.find_files)
