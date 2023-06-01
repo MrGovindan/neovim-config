@@ -4,5 +4,10 @@
 # Required tools
 - xclip (apt)
 
-# Require fonts
+# Required fonts
 - FiraCode Nerd Font
+
+# Todo
+- Status line
+- TMUX config
+- Tab navigation key maps
