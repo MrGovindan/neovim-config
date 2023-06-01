@@ -36,8 +36,16 @@ require("lazy").setup({
 
   -- nvim-lspconfig
   'neovim/nvim-lspconfig',
+
+  -- renamer.nvim
+  'filipdutescu/renamer.nvim',
+
+  -- Comment.nvim
+  'numToStr/Comment.nvim',
 })
 
+-- PLUGIN SETUP
+-- ============
 -- nvim-tree setup
 require("nvim-tree").setup({
 	sort_by = "case_sensitive",
@@ -52,7 +60,6 @@ require("nvim-tree").setup({
 	},
 })
 
-vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>')
 
 -- onedark
 require('onedark').setup {
@@ -63,6 +70,40 @@ require('onedark').load()
 -- lualine
 require('lualine').setup()
 
+-- renamer
+require('renamer').setup()
+
+-- Typescript
+require'lspconfig'.tsserver.setup{}
+
+-- Comment
+require('Comment').setup()
+
+-- Key Maps
+-- ========
+-- Tabs
+vim.keymap.set('n', '<C-h>', ':tabprevious<CR>')
+vim.keymap.set('n', '<C-l>', ':tabnext<CR>')
+
+-- Save
+vim.keymap.set('n', '<C-s>', ':w<CR>')
+
+-- Telescope
+local telescope = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', telescope.find_files)
+
+-- Nvim Tree
+vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>')
+
+-- LSP
+vim.keymap.set('n', ']a', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+vim.keymap.set('n', '[a', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+vim.keymap.set('n', '<C-k><C-i>', '<cmd>lua vim.lsp.buf.hover()<CR>')
+vim.keymap.set('n', '<C-k><C-u>', '<cmd>lua vim.lsp.buf.references()<CR>')
+vim.keymap.set('n', '<C-k><C-r>', '<cmd>lua require("renamer").rename()<CR>')
+
+-- SETTINGS
+-- ========
 -- Indentation and Tabs
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -70,28 +111,3 @@ vim.opt.expandtab = true
 
 -- Misc
 vim.opt.number = true
-
--- Key Maps
--- ========
--- Tabs
--- ----
-vim.keymap.set('n', '<C-h>', ':tabprevious<CR>')
-vim.keymap.set('n', '<C-l>', ':tabnext<CR>')
--- Save
--- ----
-vim.keymap.set('n', '<C-s>', ':w<CR>')
--- Telescope
--- ---------
-local telescope = require('telescope.builtin')
-vim.keymap.set('n', '<C-p>', telescope.find_files)
-
--- LSP
--- ===
--- General
-vim.keymap.set('n', ']a', '<cmd>lua vim.diagnostic.goto_next()<CR>')
-vim.keymap.set('n', '[a', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
-vim.keymap.set('n', '<C-k><C-i>', '<cmd>lua vim.lsp.buf.hover()<CR>')
-vim.keymap.set('n', '<C-k><C-u>', '<cmd>lua vim.lsp.buf.references()<CR>')
-
--- Typescript
-require'lspconfig'.tsserver.setup{}
