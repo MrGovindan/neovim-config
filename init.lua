@@ -28,6 +28,9 @@ require("lazy").setup({
   -- Status Line
   "nvim-lualine/lualine.nvim",
 
+  -- Tab Line
+  'kdheepak/tabline.nvim',
+
   -- Fugitive
   'tpope/vim-fugitive',
 
@@ -45,6 +48,9 @@ require("lazy").setup({
 
   -- nvim-surround
   'kylechui/nvim-surround',
+
+  -- git-blame.nvim
+  'f-person/git-blame.nvim',
 })
 
 -- PLUGIN SETUP
@@ -71,7 +77,17 @@ require('onedark').setup {
 require('onedark').load()
 
 -- lualine
-require('lualine').setup()
+require('lualine').setup({
+        sections = { 
+                lualine_c = { {
+                        'filename',
+                        path = 1,
+                } }
+        }
+})
+
+-- tabline
+require('tabline').setup()
 
 -- renamer
 require('renamer').setup()
