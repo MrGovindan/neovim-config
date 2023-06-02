@@ -42,6 +42,9 @@ require("lazy").setup({
 
   -- Comment.nvim
   'numToStr/Comment.nvim',
+
+  -- nvim-surround
+  'kylechui/nvim-surround',
 })
 
 -- PLUGIN SETUP
@@ -78,6 +81,9 @@ require'lspconfig'.tsserver.setup{}
 
 -- Comment
 require('Comment').setup()
+
+-- nvim-surround
+require('nvim-surround').setup()
 
 -- Key Maps
 -- ========
