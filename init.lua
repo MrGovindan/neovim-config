@@ -126,7 +126,6 @@ cmp.setup({
                 ['<C-n>'] = cmp.mapping.select_next_item(),
                 ['<C-p>'] = cmp.mapping.select_prev_item(),
                 ['<C-Space>'] = cmp.mapping.complete(),
-                ['<C-[>'] = cmp.mapping.abort(),
                 ['<CR>'] = cmp.mapping.confirm({ select = true }),
         }),
 })
