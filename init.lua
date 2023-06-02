@@ -1,14 +1,14 @@
 -- Lazy package manager bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-	"git",
-	"clone",
-	"--filter=blob:none",
-	"https://github.com/folke/lazy.nvim.git",
-	"--branch=stable", -- latest stable release
-	lazypath,
-	})
+  vim.fn.system({
+  "git",
+  "clone",
+  "--filter=blob:none",
+  "https://github.com/folke/lazy.nvim.git",
+  "--branch=stable", -- latest stable release
+  lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -18,12 +18,12 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 require("lazy").setup({
-	-- File explorer
-	"nvim-tree/nvim-tree.lua",
-	"nvim-tree/nvim-web-devicons",
+  -- File explorer
+  "nvim-tree/nvim-tree.lua",
+  "nvim-tree/nvim-web-devicons",
 
-	-- Theme
-	"navarasu/onedark.nvim",
+  -- Theme
+  "navarasu/onedark.nvim",
 
   -- Status Line
   "nvim-lualine/lualine.nvim",
@@ -61,49 +61,45 @@ require("lazy").setup({
 -- ============
 -- nvim-tree setup
 require("nvim-tree").setup({
-	sort_by = "case_sensitive",
-	view = {
-		width = 30,
-	},
-	renderer = {
-		group_empty = true,
-	},
-	filters = {
-		dotfiles = true,
-	},
+  sort_by = "case_sensitive",
+  view = {
+    width = 30,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
 })
 
 
 -- onedark
 require('onedark').setup {
-	style = 'darker'
+  style = 'darker'
 }
 require('onedark').load()
 
 -- lualine
 require('lualine').setup({
-        sections = { 
-                lualine_c = { {
-                        'filename',
-                        path = 1,
-                } }
-        }
+  sections = { 
+    lualine_c = {
+      { 'filename', path = 1, }
+    }
+  }
 })
 
 -- tabline
-require('tabline').setup({
-        options = {
-                show_filename_only = true,
-                show_tabs_only = true,
-        }
+require('tabline').setup({ 
+  options = {
+    show_filename_only = true,
+    show_tabs_only = true,
+  }
 })
 
 -- renamer
 require('renamer').setup()
 
--- Typescript
-local lsp = require('lspconfig')
-lsp.tsserver.setup{}
 
 -- Comment
 require('Comment').setup()
@@ -112,27 +108,38 @@ require('Comment').setup()
 require('nvim-surround').setup()
 
 -- nvim-cmp
+local lspconfig = require('lspconfig')
 local cmp = require'cmp'
 cmp.setup({
-        window = {
-                completion = cmp.config.window.bordered(),
-        },
-        sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-        }, {
-                { name = 'buffer' },
-        }),
-        mapping = cmp.mapping.preset.insert({
-                ['<C-n>'] = cmp.mapping.select_next_item(),
-                ['<C-p>'] = cmp.mapping.select_prev_item(),
-                ['<C-Space>'] = cmp.mapping.complete(),
-                ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        }),
+  window = {
+    completion = cmp.config.window.bordered(),
+  },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+  }, {
+    { name = 'buffer' },
+  }),
+  mapping = cmp.mapping.preset.insert({
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  }),
 })
+
 local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-lsp.tsserver.setup {
-        capabilities = cmp_capabilities,
+lspconfig.tsserver.setup {
+  capabilities = cmp_capabilities,
 }
+
+lspconfig.eslint.setup({
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+})
 
 -- Key Maps
 -- ========
@@ -162,6 +169,7 @@ vim.keymap.set('n', '<C-k><C-r>', '<cmd>lua require("renamer").rename()<CR>')
 -- Indentation and Tabs
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 -- Misc
