@@ -51,6 +51,10 @@ require("lazy").setup({
 
   -- git-blame.nvim
   'f-person/git-blame.nvim',
+
+  -- nvim-cmp
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
 })
 
 -- PLUGIN SETUP
@@ -98,13 +102,38 @@ require('tabline').setup({
 require('renamer').setup()
 
 -- Typescript
-require'lspconfig'.tsserver.setup{}
+local lsp = require('lspconfig')
+lsp.tsserver.setup{}
 
 -- Comment
 require('Comment').setup()
 
 -- nvim-surround
 require('nvim-surround').setup()
+
+-- nvim-cmp
+local cmp = require'cmp'
+cmp.setup({
+        window = {
+                completion = cmp.config.window.bordered(),
+        },
+        sources = cmp.config.sources({
+                { name = 'nvim_lsp' },
+        }, {
+                { name = 'buffer' },
+        }),
+        mapping = cmp.mapping.preset.insert({
+                ['<C-n>'] = cmp.mapping.select_next_item(),
+                ['<C-p>'] = cmp.mapping.select_prev_item(),
+                ['<C-Space>'] = cmp.mapping.complete(),
+                ['<C-[>'] = cmp.mapping.abort(),
+                ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        }),
+})
+local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+lsp.tsserver.setup {
+        capabilities = cmp_capabilities,
+}
 
 -- Key Maps
 -- ========
