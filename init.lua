@@ -87,7 +87,12 @@ require('lualine').setup({
 })
 
 -- tabline
-require('tabline').setup()
+require('tabline').setup({
+        options = {
+                show_filename_only = true,
+                show_tabs_only = true,
+        }
+})
 
 -- renamer
 require('renamer').setup()
