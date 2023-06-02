@@ -6,11 +6,11 @@
 - kitty
 - tmux (sudo apt install tmux)
 - neovim (sudo snap install neovim)
-- xclip (sudo apt install xclip)
+- typescript & typescript-language-server (npm install -g typescript typescript-language-server)
 - vscode-langservers-extracted (npm i -g vscode-langservers-extracted)
 
 # Required fonts
-- FiraCode Nerd Font
+- JetBrainsMono Nerd Font
 
 # TMUX config
 ## Setup

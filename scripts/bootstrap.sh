@@ -5,8 +5,10 @@ rm -f ~/.tmux.conf
 ln -sr ./tmux/.tmux.conf ~/
 
 # Kitty config setup
-cd ~/
+cd ~/.config
 mkdir -p kitty
 cd -
-rm -f ~/kitty/kitty.conf
-ln -sr ./kitty/kitty.conf ~/kitty/
+ls
+rm -f ~/.config/kitty/kitty.conf
+pwd
+ln -sr ./kitty/kitty.conf ~/.config/kitty/
