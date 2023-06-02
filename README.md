@@ -2,8 +2,12 @@
 - Create an editing experience that will allow me to maximise productivity
 
 # Required tools
-- xclip (apt)
-- git
+- git (sudo apt install git)
+- kitty
+- tmux (sudo apt install tmux)
+- neovim (sudo snap install neovim)
+- xclip (sudo apt install xclip)
+- vscode-langservers-extracted (npm i -g vscode-langservers-extracted)
 
 # Required fonts
 - FiraCode Nerd Font
