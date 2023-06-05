@@ -29,7 +29,16 @@ require("lazy").setup({
   "nvim-lualine/lualine.nvim",
 
   -- Tab Line
-  'kdheepak/tabline.nvim',
+  { 'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+      animation = true,
+    },
+  },
 
   -- Fugitive
   'tpope/vim-fugitive',
@@ -89,14 +98,6 @@ require('lualine').setup({
   }
 })
 
--- tabline
-require('tabline').setup({ 
-  options = {
-    show_filename_only = true,
-    show_tabs_only = true,
-  }
-})
-
 -- renamer
 require('renamer').setup()
 
@@ -147,8 +148,14 @@ lspconfig.eslint.setup({
 -- Key Maps
 -- ========
 -- Tabs
-vim.keymap.set('n', '<C-h>', ':tabprevious<CR>')
-vim.keymap.set('n', '<C-l>', ':tabnext<CR>')
+vim.keymap.set('n', '<C-h>', '<Cmd>BufferPrevious<CR>')
+vim.keymap.set('n', '<C-l>', '<Cmd>BufferNext<CR>')
+vim.keymap.set('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>')
+vim.keymap.set('n', '<A->>', '<Cmd>BufferMoveNext<CR>')
+vim.keymap.set('n', '<A->>', '<Cmd>BufferMoveNext<CR>')
+
+vim.keymap.set('n', '<C-F4>', '<Cmd>BufferClose<CR>')
+vim.keymap.set('n', '<A-b><A-o>', '<Cmd>BufferCloseAllButCurrent<CR>')
 
 -- Save
 vim.keymap.set('n', '<C-s>', ':w<CR>')
