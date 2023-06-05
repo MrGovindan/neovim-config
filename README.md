@@ -8,6 +8,7 @@
 - neovim (sudo snap install neovim)
 - typescript & typescript-language-server (npm install -g typescript typescript-language-server)
 - vscode-langservers-extracted (npm i -g vscode-langservers-extracted)
+- tig (sudo apt install tig)
 
 # Required fonts
 - JetBrainsMono Nerd Font
