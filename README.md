@@ -9,6 +9,7 @@
 - typescript & typescript-language-server (npm install -g typescript typescript-language-server)
 - vscode-langservers-extracted (npm i -g vscode-langservers-extracted)
 - tig (sudo apt install tig)
+- ripgrep (sudo apt install ripgrep)
 
 # Required fonts
 - JetBrainsMono Nerd Font

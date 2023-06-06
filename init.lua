@@ -163,6 +163,7 @@ vim.keymap.set('n', '<C-s>', ':w<CR>')
 -- Telescope
 local telescope = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', telescope.find_files)
+vim.keymap.set('n', '<C-A-p>', telescope.live_grep)
 
 -- Nvim Tree
 vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>')
