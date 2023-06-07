@@ -177,6 +177,7 @@ vim.keymap.set('n', '[a', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 vim.keymap.set('n', '<C-k><C-i>', '<cmd>lua vim.lsp.buf.hover()<CR>')
 vim.keymap.set('n', '<C-k><C-u>', '<cmd>lua vim.lsp.buf.references()<CR>')
 vim.keymap.set('n', '<C-k><C-r>', '<cmd>lua require("renamer").rename()<CR>')
+vim.keymap.set('n', '<C-k><C-f>', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
 -- SETTINGS
 -- ========
