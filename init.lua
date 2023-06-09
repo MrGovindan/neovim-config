@@ -64,6 +64,9 @@ require("lazy").setup({
   -- nvim-cmp
   'hrsh7th/nvim-cmp',
   'hrsh7th/cmp-nvim-lsp',
+
+  -- lsp_signature.nvim
+  'ray-x/lsp_signature.nvim',
 })
 
 -- PLUGIN SETUP
@@ -81,7 +84,7 @@ require("nvim-tree").setup({
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
 })
 
@@ -148,6 +151,11 @@ lspconfig.eslint.setup({
   end,
 })
 
+-- lsp_signature
+require 'lsp_signature'.setup({
+  transparency = true,
+})
+
 -- Key Maps
 -- ========
 -- Tabs
@@ -169,7 +177,7 @@ vim.keymap.set('n', '<C-p>', telescope.find_files)
 vim.keymap.set('n', '<C-A-p>', telescope.live_grep)
 
 -- Nvim Tree
-vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<C-n>', ':NvimTreeFindFileToggle<CR>')
 
 -- LSP
 vim.keymap.set('n', ']a', '<cmd>lua vim.diagnostic.goto_next()<CR>')
