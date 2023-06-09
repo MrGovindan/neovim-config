@@ -64,9 +64,7 @@ require("lazy").setup({
   -- nvim-cmp
   'hrsh7th/nvim-cmp',
   'hrsh7th/cmp-nvim-lsp',
-
-  -- lsp_signature.nvim
-  'ray-x/lsp_signature.nvim',
+  'hrsh7th/cmp-nvim-lsp-signature-help',
 })
 
 -- PLUGIN SETUP
@@ -123,8 +121,8 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-  }, {
     { name = 'buffer' },
+    { name = 'nvim_lsp_signature_help' },
   }),
   mapping = cmp.mapping.preset.insert({
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -149,11 +147,6 @@ lspconfig.eslint.setup({
       command = "EslintFixAll",
     })
   end,
-})
-
--- lsp_signature
-require 'lsp_signature'.setup({
-  transparency = true,
 })
 
 -- Key Maps
