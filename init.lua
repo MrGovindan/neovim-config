@@ -140,6 +140,9 @@ lspconfig.tsserver.setup {
 lspconfig.cssls.setup {
   capabilities = cmp_capabilities,
 }
+lspconfig.csharp_ls.setup {
+  capabilities = cmp_capabilities,
+}
 
 lspconfig.eslint.setup({
   on_attach = function(client, bufnr)

@@ -11,6 +11,9 @@
 - tig (sudo apt install tig)
 - ripgrep (sudo apt install ripgrep)
 
+# Optional tools
+- csharp-ls (dotnet tool install --global csharp-ls)
+
 # Required fonts
 - JetBrainsMono Nerd Font
 
