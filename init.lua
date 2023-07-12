@@ -194,3 +194,4 @@ vim.opt.expandtab = true
 
 -- Misc
 vim.opt.number = true
+vim.opt.colorcolumn = '121'
