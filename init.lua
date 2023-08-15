@@ -177,6 +177,8 @@ vim.keymap.set('n', '<C-A-p>', telescope.live_grep)
 vim.keymap.set('n', '<C-n>', ':NvimTreeFindFileToggle<CR>')
 
 -- LSP
+vim.keymap.set('n', '[q', ':cprev<CR>')
+vim.keymap.set('n', ']q', ':cnext<CR>')
 vim.keymap.set('n', ']a', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 vim.keymap.set('n', '[a', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 vim.keymap.set('n', '<C-k><C-i>', '<cmd>lua vim.lsp.buf.hover()<CR>')
