@@ -72,13 +72,18 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup {
-                ensure_installed = { "c", "lua", "rust" },
-                highlight = { enable = true, }
+                ensure_installed = { "c", "lua", "rust", "org" },
+                highlight = { 
+                  enable = true, 
+                  additional_vim_regex_highlighting = {'org'},
+                },
             }
         end },
 
   -- nvim-orgmode
   'nvim-orgmode/orgmode',
+  -- org-bullets
+  'akinsho/org-bullets.nvim',
 })
 
 -- PLUGIN SETUP
@@ -170,9 +175,13 @@ lspconfig.eslint.setup({
 local orgmode = require('orgmode')
 orgmode.setup_ts_grammar()
 orgmode.setup({
-  org_agenda_files = { '~/Dropbox/Org/*' },
-  org_default_notes_file = '~/Dropbox/Org/index.org',
+  org_agenda_files = { '~/Dropbox/Org/gtd.org' },
+  org_default_notes_file = '~/Dropbox/Org/inbox.org',
 })
+
+require('org-bullets').setup {
+  concealcursor = true,
+}
 
 -- Key Maps
 -- ========
