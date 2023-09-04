@@ -72,7 +72,7 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup {
-                ensure_installed = { "c", "lua", "rust", "org" },
+                ensure_installed = { "c", "lua", "rust", "org", "bash" },
                 highlight = { 
                   enable = true, 
                   additional_vim_regex_highlighting = {'org'},
