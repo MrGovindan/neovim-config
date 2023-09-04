@@ -66,6 +66,19 @@ require("lazy").setup({
   'hrsh7th/nvim-cmp',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-nvim-lsp-signature-help',
+
+  -- nvim-treesitter
+  { "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function()
+            require("nvim-treesitter.configs").setup {
+                ensure_installed = { "c", "lua", "rust" },
+                highlight = { enable = true, }
+            }
+        end },
+
+  -- nvim-orgmode
+  'nvim-orgmode/orgmode',
 })
 
 -- PLUGIN SETUP
@@ -106,7 +119,6 @@ require('lualine').setup({
 -- renamer
 require('renamer').setup()
 
-
 -- Comment
 require('Comment').setup()
 
@@ -124,6 +136,7 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'nvim_lsp_signature_help' },
+    { name = 'orgmode' },
   }),
   mapping = cmp.mapping.preset.insert({
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -151,6 +164,14 @@ lspconfig.eslint.setup({
       command = "EslintFixAll",
     })
   end,
+})
+
+-- orgmode
+local orgmode = require('orgmode')
+orgmode.setup_ts_grammar()
+orgmode.setup({
+  org_agenda_files = { '~/Dropbox/Org/*' },
+  org_default_notes_file = '~/Dropbox/Org/index.org',
 })
 
 -- Key Maps
