@@ -72,7 +72,7 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup {
-                ensure_installed = { "c", "lua", "rust", "org", "bash" },
+                ensure_installed = { "c", "lua", "rust", "org", "bash", "typescript", "tsx" },
                 highlight = { 
                   enable = true, 
                   additional_vim_regex_highlighting = {'org'},
@@ -175,8 +175,16 @@ lspconfig.eslint.setup({
 local orgmode = require('orgmode')
 orgmode.setup_ts_grammar()
 orgmode.setup({
-  org_agenda_files = { '~/Dropbox/Org/gtd.org' },
+  org_agenda_files = { '~/Dropbox/Org/gtd.org', '~/Dropbox/Org/reminders.org'  },
   org_default_notes_file = '~/Dropbox/Org/inbox.org',
+  org_todo_keywords = {'TODO', 'NEXT', 'WAITING', '|', 'DONE', 'CANCELLED'},
+  org_todo_keyword_faces = {
+    TODO =      ':weight bold :foreground yellow',
+    NEXT =      ':weight bold :foreground blue',
+    WAITING =   ':weight bold :foreground orange',
+    DONE =      ':weight bold :foreground green',
+    CANCELLED = ':weight bold :foreground red',
+  },
 })
 
 require('org-bullets').setup {
