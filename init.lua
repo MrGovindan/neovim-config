@@ -175,8 +175,8 @@ lspconfig.eslint.setup({
 local orgmode = require('orgmode')
 orgmode.setup_ts_grammar()
 orgmode.setup({
-  org_agenda_files = { '~/Dropbox/Org/gtd.org', '~/Dropbox/Org/reminders.org'  },
-  org_default_notes_file = '~/Dropbox/Org/inbox.org',
+  org_agenda_files = { '/media/webdav/CloudDrive/gtd.org', '/media/webdav/CloudDrive/reminders.org'  },
+  org_default_notes_file = '/media/webdav/CloudDrive/inbox.org',
   org_todo_keywords = {'TODO', 'NEXT', 'WAITING', '|', 'DONE', 'CANCELLED'},
   org_todo_keyword_faces = {
     TODO =      ':weight bold :foreground yellow',
