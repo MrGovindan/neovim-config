@@ -72,7 +72,7 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup {
-                ensure_installed = { "c", "lua", "rust", "org", "bash", "typescript", "tsx" },
+                ensure_installed = { "c", "lua", "rust", "org", "bash", "typescript", "tsx", "toml" },
                 highlight = { 
                   enable = true, 
                   additional_vim_regex_highlighting = {'org'},
@@ -84,6 +84,8 @@ require("lazy").setup({
   'nvim-orgmode/orgmode',
   -- org-bullets
   'akinsho/org-bullets.nvim',
+  -- rust-tools
+  'simrat39/rust-tools.nvim',
 })
 
 -- PLUGIN SETUP
@@ -161,6 +163,25 @@ lspconfig.cssls.setup {
 lspconfig.csharp_ls.setup {
   capabilities = cmp_capabilities,
 }
+
+local rt = require("rust-tools")
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.rs",
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
 
 lspconfig.eslint.setup({
   on_attach = function(client, bufnr)
