@@ -72,7 +72,7 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup {
-                ensure_installed = { "c", "lua", "rust", "org", "bash", "typescript", "tsx", "toml" },
+                ensure_installed = { "c", "cpp", "lua", "rust", "org", "bash", "javascript", "typescript", "tsx", "toml" },
                 highlight = { 
                   enable = true, 
                   additional_vim_regex_highlighting = {'org'},
@@ -164,17 +164,7 @@ lspconfig.csharp_ls.setup {
   capabilities = cmp_capabilities,
 }
 
-local rt = require("rust-tools")
-rt.setup({
-  server = {
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-  },
-})
+require("rust-tools").setup()
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.rs",
@@ -231,6 +221,7 @@ vim.keymap.set('n', '<C-s>', ':w<CR>')
 local telescope = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', telescope.find_files)
 vim.keymap.set('n', '<C-A-p>', telescope.live_grep)
+vim.keymap.set('n', '<C-f>', telescope.grep_string)
 
 -- Nvim Tree
 vim.keymap.set('n', '<C-n>', ':NvimTreeFindFileToggle<CR>')
