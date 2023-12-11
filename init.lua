@@ -15,6 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.o.backupcopy = "yes"
+
 vim.opt.termguicolors = true
 vim.opt.clipboard = 'unnamed'
 
