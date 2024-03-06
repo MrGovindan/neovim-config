@@ -18,7 +18,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.o.backupcopy = "yes"
 
 vim.opt.termguicolors = true
-vim.opt.clipboard = 'unnamed'
+vim.opt.clipboard = 'unnamedplus'
 
 require("lazy").setup({
   -- File explorer
@@ -220,6 +220,11 @@ vim.keymap.set('n', '<A-b><A-o>', '<Cmd>BufferCloseAllButCurrent<CR>')
 vim.keymap.set('n', '<C-s>', ':w<CR>')
 
 -- Telescope
+require('telescope').setup({
+  defaults = {
+    path_display = {"smart"},
+  },
+})
 local telescope = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', telescope.find_files)
 vim.keymap.set('n', '<C-A-p>', telescope.live_grep)
