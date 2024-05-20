@@ -88,6 +88,8 @@ require("lazy").setup({
   'akinsho/org-bullets.nvim',
   -- rust-tools
   'simrat39/rust-tools.nvim',
+  -- Github Copilot
+  'github/copilot.vim'
 })
 
 -- PLUGIN SETUP
@@ -151,7 +153,7 @@ cmp.setup({
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-k><C-k>'] = cmp.mapping.confirm({ select = true }),
   }),
 })
 
@@ -186,7 +188,6 @@ lspconfig.eslint.setup({
 
 -- orgmode
 local orgmode = require('orgmode')
-orgmode.setup_ts_grammar()
 orgmode.setup({
   org_agenda_files = { '/media/webdav/CloudDrive/gtd.org', '/media/webdav/CloudDrive/reminders.org'  },
   org_default_notes_file = '/media/webdav/CloudDrive/inbox.org',
@@ -216,6 +217,11 @@ vim.keymap.set('n', '<A->>', '<Cmd>BufferMoveNext<CR>')
 vim.keymap.set('n', '<C-F4>', '<Cmd>BufferClose<CR>')
 vim.keymap.set('n', '<A-b><A-o>', '<Cmd>BufferCloseAllButCurrent<CR>')
 
+-- Disable copilot
+vim.keymap.set('n', '<F8>', '<Cmd>Copilot disable<CR>')
+-- Enable copilot
+vim.keymap.set('n', '<F9>', '<Cmd>Copilot enable<CR>')
+
 -- Save
 vim.keymap.set('n', '<C-s>', ':w<CR>')
 
@@ -243,6 +249,7 @@ vim.keymap.set('n', '<C-k><C-u>', '<cmd>lua vim.lsp.buf.references()<CR>')
 vim.keymap.set('n', '<C-k><C-r>', '<cmd>lua require("renamer").rename()<CR>')
 vim.keymap.set('n', '<C-k><C-f>', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 vim.keymap.set('n', '<F5>', ':LspRestart<CR>')
+
 
 -- SETTINGS
 -- ========
