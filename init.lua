@@ -89,7 +89,15 @@ require("lazy").setup({
   -- rust-tools
   'simrat39/rust-tools.nvim',
   -- Github Copilot
-  'github/copilot.vim'
+  'github/copilot.vim',
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+    },
+  },
 })
 
 -- PLUGIN SETUP
@@ -250,6 +258,8 @@ vim.keymap.set('n', '<C-k><C-r>', '<cmd>lua require("renamer").rename()<CR>')
 vim.keymap.set('n', '<C-k><C-f>', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 vim.keymap.set('n', '<F5>', ':LspRestart<CR>')
 
+-- CopilotChat
+require('CopilotChat').setup()
 
 -- SETTINGS
 -- ========
