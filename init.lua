@@ -261,6 +261,9 @@ vim.keymap.set('n', '<F5>', ':LspRestart<CR>')
 -- CopilotChat
 require('CopilotChat').setup()
 
+vim.keymap.set('n', '<C-c><C-p>', '<Cmd>CopilotChat<CR>')
+vim.keymap.set('n', '<C-c><C-s>', '<Cmd>CopilotChatCommitStaged<CR>')
+
 -- SETTINGS
 -- ========
 -- Indentation and Tabs
