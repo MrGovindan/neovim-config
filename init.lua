@@ -225,11 +225,6 @@ vim.keymap.set('n', '<A->>', '<Cmd>BufferMoveNext<CR>')
 vim.keymap.set('n', '<C-F4>', '<Cmd>BufferClose<CR>')
 vim.keymap.set('n', '<A-b><A-o>', '<Cmd>BufferCloseAllButCurrent<CR>')
 
--- Disable copilot
-vim.keymap.set('n', '<F8>', '<Cmd>Copilot disable<CR>')
--- Enable copilot
-vim.keymap.set('n', '<F9>', '<Cmd>Copilot enable<CR>')
-
 -- Save
 vim.keymap.set('n', '<C-s>', ':w<CR>')
 
@@ -243,6 +238,7 @@ local telescope = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', telescope.find_files)
 vim.keymap.set('n', '<C-A-p>', telescope.live_grep)
 vim.keymap.set('n', '<C-f>', telescope.grep_string)
+vim.keymap.set('n', '<C-t><C-p>', '<cmd>:Telescope find_files find_command=rg,--hidden,--files,-g,!*.spec.*,-g,!*.test.*<CR>')
 
 -- Nvim Tree
 vim.keymap.set('n', '<C-n>', ':NvimTreeFindFileToggle<CR>')
@@ -257,6 +253,11 @@ vim.keymap.set('n', '<C-k><C-u>', '<cmd>lua vim.lsp.buf.references()<CR>')
 vim.keymap.set('n', '<C-k><C-r>', '<cmd>lua require("renamer").rename()<CR>')
 vim.keymap.set('n', '<C-k><C-f>', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 vim.keymap.set('n', '<F5>', ':LspRestart<CR>')
+
+-- Copilot
+require('copilot').setup()
+vim.keymap.set('n', '<F8>', '<Cmd>Copilot disable<CR>:echo "Copilot disabled"<CR>')
+vim.keymap.set('n', '<F9>', '<Cmd>Copilot enable<CR>:echo "Copilot enabled"<CR>')
 
 -- CopilotChat
 require('CopilotChat').setup()
