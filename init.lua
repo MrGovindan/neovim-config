@@ -181,7 +181,7 @@ cmp.setup({
 })
 
 local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   capabilities = cmp_capabilities,
 }
 lspconfig.cssls.setup {
