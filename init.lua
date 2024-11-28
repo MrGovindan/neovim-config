@@ -253,7 +253,7 @@ local telescope = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', telescope.find_files)
 vim.keymap.set('n', '<C-A-p>', telescope.live_grep)
 vim.keymap.set('n', '<C-f>', telescope.grep_string)
-vim.keymap.set('n', '<C-t><C-p>', '<cmd>:Telescope find_files find_command=rg,--hidden,--files,-g,!*.spec.*,-g,!*.test.*<CR>')
+vim.keymap.set('n', '<C-t><C-p>', "<cmd>:Telescope live_grep find_command=rg,-g,'!*spec*'<CR>")
 
 -- Nvim Tree
 vim.keymap.set('n', '<C-n>', ':NvimTreeFindFileToggle<CR>')
@@ -278,7 +278,7 @@ vim.keymap.set('n', '<F9>', '<Cmd>Copilot enable<CR>:echo "Copilot enabled"<CR>'
 require('CopilotChat').setup()
 
 vim.keymap.set('n', '<C-c><C-p>', '<Cmd>CopilotChat<CR>')
-vim.keymap.set('n', '<C-c><C-s>', '<Cmd>CopilotChatCommitStaged<CR>')
+vim.keymap.set('n', '<C-c><C-s>', '<Cmd>CopilotChatCommit<CR>')
 
 -- SETTINGS
 -- ========
