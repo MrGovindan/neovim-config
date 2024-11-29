@@ -64,6 +64,10 @@ require("lazy").setup({
   -- git-blame.nvim
   'f-person/git-blame.nvim',
 
+  -- mason.nvim
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+
   -- nvim-cmp
   'hrsh7th/nvim-cmp',
   'hrsh7th/cmp-nvim-lsp',
@@ -74,18 +78,13 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup {
-                ensure_installed = { "c", "cpp", "lua", "rust", "org", "bash", "javascript", "typescript", "tsx", "toml" },
+                ensure_installed = { "c", "cpp", "lua", "rust", "bash", "javascript", "typescript", "tsx", "toml" },
                 highlight = { 
                   enable = true, 
-                  additional_vim_regex_highlighting = {'org'},
                 },
             }
         end },
 
-  -- nvim-orgmode
-  'nvim-orgmode/orgmode',
-  -- org-bullets
-  'akinsho/org-bullets.nvim',
   -- rust-tools
   'simrat39/rust-tools.nvim',
   -- Github Copilot
@@ -160,6 +159,12 @@ require('Comment').setup()
 require('nvim-surround').setup()
 
 -- nvim-cmp
+require("mason").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = { "ts_ls", "cssls" },
+  automatic_installation = true,
+})
+
 local lspconfig = require('lspconfig')
 local cmp = require'cmp'
 cmp.setup({
@@ -170,7 +175,6 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'nvim_lsp_signature_help' },
-    { name = 'orgmode' },
   }),
   mapping = cmp.mapping.preset.insert({
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -208,25 +212,6 @@ lspconfig.eslint.setup({
     })
   end,
 })
-
--- orgmode
-local orgmode = require('orgmode')
-orgmode.setup({
-  org_agenda_files = { '/media/webdav/CloudDrive/gtd.org', '/media/webdav/CloudDrive/reminders.org'  },
-  org_default_notes_file = '/media/webdav/CloudDrive/inbox.org',
-  org_todo_keywords = {'TODO', 'NEXT', 'WAITING', '|', 'DONE', 'CANCELLED'},
-  org_todo_keyword_faces = {
-    TODO =      ':weight bold :foreground yellow',
-    NEXT =      ':weight bold :foreground blue',
-    WAITING =   ':weight bold :foreground orange',
-    DONE =      ':weight bold :foreground green',
-    CANCELLED = ':weight bold :foreground red',
-  },
-})
-
-require('org-bullets').setup {
-  concealcursor = true,
-}
 
 -- Key Maps
 -- ========
