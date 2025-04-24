@@ -50,7 +50,29 @@ require("lazy").setup({
   { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep' } },
 
   -- nvim-lspconfig
-  'neovim/nvim-lspconfig',
+  -- 'neovim/nvim-lspconfig',
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = { 'saghen/blink.cmp' },
+
+    -- example using `opts` for defining servers
+    opts = {
+      servers = {
+        lua_ls = {},
+        ts_ls = {},
+        ccsls = {},
+      }
+    },
+    config = function(_, opts)
+      local lspconfig = require('lspconfig')
+      for server, config in pairs(opts.servers) do
+        -- passing config.capabilities to blink.cmp merges with the capabilities in your
+        -- `opts[server].capabilities, if you've defined it
+        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+        lspconfig[server].setup(config)
+      end
+    end
+  },
 
   -- renamer.nvim
   'filipdutescu/renamer.nvim',
@@ -69,9 +91,64 @@ require("lazy").setup({
   "williamboman/mason-lspconfig.nvim",
 
   -- nvim-cmp
-  'hrsh7th/nvim-cmp',
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-nvim-lsp-signature-help',
+  -- 'hrsh7th/nvim-cmp',
+  -- 'hrsh7th/cmp-nvim-lsp',
+  -- 'hrsh7th/cmp-nvim-lsp-signature-help',
+
+  -- blink-cmp
+  {
+    'saghen/blink.cmp',
+    -- optional: provides snippets for the snippet source
+    dependencies = { 'rafamadriz/friendly-snippets' },
+
+    -- use a release tag to download pre-built binaries
+    version = '1.*',
+    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    -- build = 'cargo build --release',
+    -- If you use nix, you can build from source using latest nightly rust with:
+    -- build = 'nix run .#build-plugin',
+
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+      -- 'super-tab' for mappings similar to vscode (tab to accept)
+      -- 'enter' for enter to accept
+      -- 'none' for no mappings
+      --
+      -- All presets have the following mappings:
+      -- C-space: Open menu or open docs if already open
+      -- C-n/C-p or Up/Down: Select next/previous item
+      -- C-e: Hide menu
+      -- C-k: Toggle signature help (if signature.enabled = true)
+      --
+      -- See :h blink-cmp-config-keymap for defining your own keymap
+      keymap = { preset = 'default' },
+
+      appearance = {
+        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        -- Adjusts spacing to ensure icons are aligned
+        nerd_font_variant = 'mono'
+      },
+
+      -- (Default) Only show the documentation popup when manually triggered
+      completion = { documentation = { auto_show = false } },
+
+      -- Default list of enabled providers defined so that you can extend it
+      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+
+      -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+      -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+      -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+      --
+      -- See the fuzzy documentation for more information
+      fuzzy = { implementation = "prefer_rust_with_warning" }
+    },
+    opts_extend = { "sources.default" }
+  },
 
   -- nvim-treesitter
   { "nvim-treesitter/nvim-treesitter",
@@ -88,15 +165,6 @@ require("lazy").setup({
   -- rust-tools
   'simrat39/rust-tools.nvim',
   -- Github Copilot
-  'github/copilot.vim',
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-    },
-  },
 
   {
     "folke/flash.nvim",
@@ -166,34 +234,34 @@ require("mason-lspconfig").setup({
 })
 
 local lspconfig = require('lspconfig')
-local cmp = require'cmp'
-cmp.setup({
-  window = {
-    completion = cmp.config.window.bordered(),
-  },
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-    { name = 'nvim_lsp_signature_help' },
-  }),
-  mapping = cmp.mapping.preset.insert({
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-k><C-k>'] = cmp.mapping.confirm({ select = true }),
-  }),
-})
+-- local cmp = require'cmp'
+-- cmp.setup({
+--   window = {
+--     completion = cmp.config.window.bordered(),
+--   },
+--   sources = cmp.config.sources({
+--     { name = 'nvim_lsp' },
+--     { name = 'buffer' },
+--     { name = 'nvim_lsp_signature_help' },
+--   }),
+--   mapping = cmp.mapping.preset.insert({
+--     ['<C-n>'] = cmp.mapping.select_next_item(),
+--     ['<C-p>'] = cmp.mapping.select_prev_item(),
+--     ['<C-Space>'] = cmp.mapping.complete(),
+--     ['<C-k><C-k>'] = cmp.mapping.confirm({ select = true }),
+--   }),
+-- })
 
-local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-lspconfig.ts_ls.setup {
-  capabilities = cmp_capabilities,
-}
-lspconfig.cssls.setup {
-  capabilities = cmp_capabilities,
-}
-lspconfig.csharp_ls.setup {
-  capabilities = cmp_capabilities,
-}
+-- local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- lspconfig.ts_ls.setup {
+--   capabilities = cmp_capabilities,
+-- }
+-- lspconfig.cssls.setup {
+--   capabilities = cmp_capabilities,
+-- }
+-- lspconfig.csharp_ls.setup {
+--   capabilities = cmp_capabilities,
+-- }
 
 require("rust-tools").setup()
 
@@ -253,17 +321,6 @@ vim.keymap.set('n', '<C-k><C-u>', '<cmd>lua vim.lsp.buf.references()<CR>')
 vim.keymap.set('n', '<C-k><C-r>', '<cmd>lua require("renamer").rename()<CR>')
 vim.keymap.set('n', '<C-k><C-f>', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 vim.keymap.set('n', '<F5>', ':LspRestart<CR>')
-
--- Copilot
-require('copilot').setup()
-vim.keymap.set('n', '<F8>', '<Cmd>Copilot disable<CR>:echo "Copilot disabled"<CR>')
-vim.keymap.set('n', '<F9>', '<Cmd>Copilot enable<CR>:echo "Copilot enabled"<CR>')
-
--- CopilotChat
-require('CopilotChat').setup()
-
-vim.keymap.set('n', '<C-c><C-p>', '<Cmd>CopilotChat<CR>')
-vim.keymap.set('n', '<C-c><C-s>', '<Cmd>CopilotChatCommit<CR>')
 
 -- SETTINGS
 -- ========
